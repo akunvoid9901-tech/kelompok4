@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pesan Rahasia</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background: linear-gradient(135deg,#1e3c72,#6a11cb);
+        overflow:hidden;
+    }
+
+    .container{
+        width:90%;
+        max-width:500px;
+        background: rgba(255,255,255,0.1);
+        border:1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(12px);
+        border-radius:25px;
+        padding:30px;
+        text-align:center;
+        color:white;
+        box-shadow:0 0 30px rgba(0,0,0,0.3);
+        animation: muncul 1s ease;
+    }
+
+    @keyframes muncul{
+        from{
+            transform: translateY(30px);
+            opacity:0;
+        }
+        to{
+            transform: translateY(0);
+            opacity:1;
+        }
+    }
+
+    h1{
+        margin-bottom:10px;
+        font-size:32px;
+    }
+
+    p{
+        margin-bottom:20px;
+        color:#ddd;
+    }
+
+    textarea, input{
+        width:100%;
+        padding:15px;
+        border:none;
+        outline:none;
+        border-radius:15px;
+        margin-top:10px;
+        font-size:16px;
+        background: rgba(255,255,255,0.15);
+        color:white;
+    }
+
+    textarea::placeholder,
+    input::placeholder{
+        color:#ddd;
+    }
+
+    button{
+        margin-top:18px;
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:15px;
+        background: linear-gradient(90deg,#00c6ff,#7f00ff);
+        color:white;
+        font-size:17px;
+        cursor:pointer;
+        transition:0.3s;
+        font-weight:bold;
+    }
+
+    button:hover{
+        transform:scale(1.03);
+        box-shadow:0 0 15px rgba(255,255,255,0.3);
+    }
+
+    .hasil{
+        margin-top:25px;
+        background: rgba(0,0,0,0.2);
+        padding:20px;
+        border-radius:15px;
+        min-height:90px;
+        word-wrap:break-word;
+        font-size:18px;
+        line-height:1.6;
+    }
+
+    .emoji{
+        font-size:35px;
+        margin-bottom:10px;
+        animation: goyang 2s infinite;
+    }
+
+    @keyframes goyang{
+        0%{transform: rotate(0deg);}
+        25%{transform: rotate(10deg);}
+        50%{transform: rotate(0deg);}
+        75%{transform: rotate(-10deg);}
+        100%{transform: rotate(0deg);}
+    }
+
+    .footer{
+        margin-top:20px;
+        font-size:13px;
+        color:#ccc;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="emoji">🔐💜🕵️‍♂️✨</div>
+
+    <h1>Pesan Rahasia</h1>
+
+    <p>Ketik pesanmu... pesan akan berubah menjadi kode rahasia 😎</p>
+
+    <textarea id="pesan" rows="4" placeholder="Tulis pesan rahasia di sini..."></textarea>
+
+    <button onclick="ubahPesan()">Ubah Jadi Rahasia</button>
+
+    <div class="hasil" id="hasil">
+        Hasil pesan rahasia akan muncul di sini...
+    </div>
+
+    <input type="password" id="kunci" placeholder="Masukkan Kata Kunci 🔑">
+
+    <button onclick="bukaPesan()">Buka Pesan Asli</button>
+
+    <div class="footer">
+        Tema Biru-Ungu 💙💜 | Secret Message Generator
+    </div>
+
+</div>
+
+<script>
+
+    const pesanAsli =
+    "gagal itu bukti kamu sudah mencoba, berhenti itu bukti bahwa kamu menyerah";
+
+    const emojiKode = [
+        "💀","👾","🔥","✨","😈","🛸","⚡","💜","🔒","🎭",
+        "🚀","🌌","🕶️","🌀","💎","☠️","🎮","🤖","🧩"
+    ];
+
+    function randomEmoji(){
+        return emojiKode[Math.floor(Math.random()*emojiKode.length)];
+    }
+
+    function ubahPesan(){
+
+        let input = document.getElementById("pesan").value;
+
+        if(input.trim() === ""){
+            alert("Tulis pesan dulu 😅");
+            return;
+        }
+
+        let hasil = "";
+
+        for(let i=0; i<input.length; i++){
+            hasil += randomEmoji() + " ";
+        }
+
+        document.getElementById("hasil").innerHTML =
+            "🔐 KODE RAHASIA:<br><br>" + hasil;
+    }
+
+    function bukaPesan(){
+
+        let kunci = document.getElementById("kunci").value;
+
+        if(kunci === "nextgen02"){
+
+            document.getElementById("hasil").innerHTML =
+            "✅ <b>Pesan Asli Berhasil Dibuka:</b><br><br>" +
+            "💬 <i>" + pesanAsli + "</i> 💜";
+
+        }else{
+
+            document.getElementById("hasil").innerHTML =
+            "❌ Kata kunci salah! Pesan tetap terkunci 🔒😈";
+        }
+    }
+
+</script>
+
+</body>
+  </html>
